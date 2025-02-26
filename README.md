@@ -61,5 +61,5 @@ Response success:
 
 Response failed:
 ```
-{"response":"success"}
+{"response":"Error: #ERROR_MESSAGE#"}
 ```
