@@ -40,7 +40,7 @@ docker run -d \
            --name sms-sender \
            -e ENDPOINT="http://192.168.0.1" \
            -e ADMINPASS="password" \
-           toto:toto
+           tibhome/sms-sender-api:main
 ```
 
 ## Testing the API
