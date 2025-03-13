@@ -26,6 +26,5 @@ def send_message():
     except Exception as e:
         return jsonify({"response": f"Error : {e}"}), 400
 
-
 if __name__ == '__main__':
     app.run(debug=False)

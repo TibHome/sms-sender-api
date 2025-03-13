@@ -70,25 +70,29 @@ def logout():
 def send_sms(phone_number, message):
     hex_message = utf8_to_utf16be_hex(message)
 
-    url = f"{ENDPOINT}/goform/goform_set_cmd_process"
-    headers = {"Referer": f"{ENDPOINT}/index.html"}
-    data = {
-        "goformId": "SEND_SMS",
-        "Number": phone_number,
-        "MessageBody": hex_message,
-        "ID": "-1",
-        "encode_type": "GSM7_default"
-    }
+    phone_numbers = phone_number.split(";") if ";" in phone_number else [phone_number]
 
-    response = requests.post(url, headers=headers, data=data)
+    for number in phone_numbers:
+        number = number.strip()
+        url = f"{ENDPOINT}/goform/goform_set_cmd_process"
+        headers = {"Referer": f"{ENDPOINT}/index.html"}
+        data = {
+            "goformId": "SEND_SMS",
+            "Number": number,
+            "MessageBody": hex_message,
+            "ID": "-1",
+            "encode_type": "GSM7_default"
+        }
 
-    if response.status_code == 200:
-        result = response.json().get("result")
-        if result == "success":
-            mylog(generate_json(get_date(), "success", "send message to " + phone_number))
+        response = requests.post(url, headers=headers, data=data)
+
+        if response.status_code == 200:
+            result = response.json().get("result")
+            if result == "success":
+                mylog(generate_json(get_date(), "success", "send message to " + number))
+            else:
+                mylog(generate_json(get_date(), "failed", "send message"))
+                raise Exception("Message sending failed")
         else:
-            mylog(generate_json(get_date(), "failed", "send message"))
-            raise Exception("Message sending failed")
-    else:
-        mylog(generate_json(get_date(), "error", "HTTP request failed"))
-        raise Exception("HTTP request failed")
+            mylog(generate_json(get_date(), "error", "HTTP request failed"))
+            raise Exception("HTTP request failed")
