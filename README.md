@@ -4,6 +4,12 @@
 
 **SMS Sender API** is a web server built with Python that allows sending SMS messages. The server runs inside a Docker container based on `python:3.9.21-alpine3.21`.
 
+## How It Works
+
+- The script takes a string containing one or multiple phone numbers.  
+- If multiple numbers are provided (separated by `;`), the script splits them into a list.  
+- It then iterates through each number and sends an individual SMS request.
+
 ## Requirements
 
 The application depends on the following Python packages:
