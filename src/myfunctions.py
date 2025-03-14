@@ -6,7 +6,18 @@ from datetime import datetime
 
 ENDPOINT =  os.getenv("ENDPOINT")
 ADMINPASS =  os.getenv("ADMINPASS")
-    
+
+if os.path.exists("/config.conf"):
+    with open("/config.conf", "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                key, value = line.split("=", 1)
+                if key == "ENDPOINT":
+                    ENDPOINT = value
+                elif key == "ADMINPASS":
+                    ADMINPASS = value
+
 def get_date():
     return datetime.utcnow().isoformat()
 
