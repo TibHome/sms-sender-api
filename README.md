@@ -36,7 +36,7 @@ The Docker image requires the following environment variables:
 
 Make sure to set these variables when running the container.
 
-## Running the API
+## Running the Container (basic way)
 
 To use the Docker image, execute the following command:
 
@@ -46,6 +46,14 @@ docker run -d \
            --name sms-sender \
            -e ENDPOINT="http://192.168.0.1" \
            -e ADMINPASS="password" \
+           tibhome/sms-sender-api:main
+```
+## Running the Container (external config file)
+```sh
+docker run -d \
+           -p 5000:5000 \
+           --name sms-sender \
+           -v /my/path/config.conf:/config.conf \
            tibhome/sms-sender-api:main
 ```
 
