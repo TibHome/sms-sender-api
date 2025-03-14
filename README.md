@@ -65,7 +65,7 @@ To test API, execute the following command:
 curl --location 'http://127.0.0.1:5000/send' \
      --header 'Content-Type: application/x-www-form-urlencoded' \
      --data-urlencode 'recipient=0612345678' \
-     --data-urlencode 'message=This is test!'
+     --data-urlencode 'message=This is test'
 ```
 
 Response success:
