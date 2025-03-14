@@ -8,8 +8,9 @@ COPY src /app
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-# Exposer le port 5000
 EXPOSE 5000
 
-# Définir le script d'entrée
+ENV ENDPOINT="http://192.168.0.1"
+ENV ADMINPASS="password"
+
 ENTRYPOINT ["sh", "/entrypoint.sh"]
