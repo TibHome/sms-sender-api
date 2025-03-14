@@ -13,4 +13,7 @@ EXPOSE 5000
 ENV ENDPOINT="http://192.168.0.1"
 ENV ADMINPASS="password"
 
+HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
+  CMD wget --quiet --tries=1 --spider http://127.0.0.1:5000/api/health || exit 1
+
 ENTRYPOINT ["sh", "/entrypoint.sh"]

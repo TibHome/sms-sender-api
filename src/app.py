@@ -5,6 +5,11 @@ ENDPOINT = "http://192.168.0.1"
 
 app = Flask(__name__)
 
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    print(jsonify({"healthcheck": "success"}))
+    return jsonify({"response": "success"})
+    
 @app.route('/send', methods=['POST'])
 def send_message():
     
